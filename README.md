@@ -27,3 +27,4 @@
    
 ## 빌드 및 실행방법
 - `gradle build && java -jar build/libs/wemakeprice_parsetest-0.0.1.jar`
+- [http://localhost:8080](http://localhost:8080) 접속 후 기능 테스트
