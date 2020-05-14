@@ -21,7 +21,7 @@ public final class ParseUtil {
      * URL 파싱
      *
      * @param url 파싱할 URL
-     * @return
+     * @return 파싱된 데이터 반환
      * @throws IOException
      */
     public static String parseUrl(String url) throws Exception {
@@ -44,11 +44,11 @@ public final class ParseUtil {
      * 영문자와 숫자 조합 문자열 생성
      *
      * @param sr 파싱된 데이터 vo
-     * @param divide
-     * @return
+     * @param divide 묶음 단
+     * @return위 조합된 데이터 반환
      */
     public static ReturnData getCombineText(ParseData sr, int divide) {
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
 
         for(int i = 1; i <= sr.getAlpha().length(); i++) {
             if((i > 1) && (sr.getNumber().length() >= i)) {
@@ -64,7 +64,7 @@ public final class ParseUtil {
      * TAG 제거 처리된 텍스트를 기준으로 StringResult 반환
      *
      * @param text 가공할 텍스트
-     * @return
+     * @return 가공된 데이터 반환
      * @throws Exception
      */
     public static ParseData getExceptHtml(String text) throws Exception {
@@ -78,7 +78,7 @@ public final class ParseUtil {
      * 전체 택스트를 기준으로 StringResult 반환
      *
      * @param text 가공할 텍스트
-     * @return
+     * @return 가공된 데이터 반환
      * @throws Exception
      */
     public static ParseData getAllText(String text) throws Exception {
@@ -93,11 +93,11 @@ public final class ParseUtil {
      *
      * @param text 가공할 텍스트
      * @param divide 묶음 단위
-     * @return
+     * @return 몫, 나머지 계산된 조합 데이터 반환
      */
     private static ReturnData getParseResult(String text, int divide) {
         int textSize = text.length();
-        String quotient = "", remainder = "";
+        String quotient, remainder = "";
 
         if(textSize % divide == 0){
             quotient = text;
@@ -107,19 +107,17 @@ public final class ParseUtil {
             remainder = text.substring(textSize-remainLength, textSize);
         }
 
-        ReturnData returnData = ReturnData.builder()
+        return ReturnData.builder()
                 .quotient(quotient)
                 .remainder(remainder)
                 .build();
-
-        return returnData;
     }
 
     /**
      * 영문자와, 숫자를 각기 분리하여 StringResult 로 반환
      *
      * @param text 가공할 텍스트
-     * @return
+     * @return 영문자와 숫자로 분리된 조합 데이터 반환
      * @throws Exception
      */
     private static ParseData getStringResult(String text) throws Exception {
@@ -131,19 +129,17 @@ public final class ParseUtil {
         sr = getSplitStream(replaceParams(text, 4));
         String number = sr.collect(Collectors.joining());
 
-        ParseData parseData = ParseData.builder()
+        return ParseData.builder()
                 .alpha(alpha)
                 .number(number)
                 .build();
-
-        return parseData;
     }
 
     /**
      * String 을 Stream 으로 분할
      *
      * @param text 가공할 텍스트
-     * @return
+     * @return Steam으로 쪼개진 데이터 반환
      */
     private static Stream<String> getSplitStream(String text) {
         return Pattern.compile("").splitAsStream(text).sorted();
@@ -154,7 +150,7 @@ public final class ParseUtil {
      *
      * @param text 가공할 텍스트
      * @param regexType 정규식 유형 (0: 공백 제거, 1: 태그 제거, 2: 영문자와 숫자를 제외하고 제거, 3: 숫자 제거, 4: 숫자를 제외하고 제거 )
-     * @return
+     * @return 정규식 처리된 데이터 반환
      * @throws Exception
      */
     private static String replaceParams(String text, int regexType) throws Exception {
