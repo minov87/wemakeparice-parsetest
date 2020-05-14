@@ -26,4 +26,4 @@
    - 사용자가 입력한 자연수의 묶음 단위를 기준으로 몫과 나머지를 구하여 노출
    
 ## 빌드 및 실행방법
-- `gradle build && java -jar build/libs/wemakerprice_parsetest-0.0.1.jar`
+- `gradle build && java -jar build/libs/wemakeprice_parsetest-0.0.1.jar`
