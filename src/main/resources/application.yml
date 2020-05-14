@@ -1,0 +1,16 @@
+#DEFAULT
+spring:
+  profiles:
+    active: default
+  application:
+    name: WemakepriceParseTest
+
+server:
+  port: 8080
+  error:
+    whitelabel:
+      enabled: false
+
+#LOG
+logging:
+  config: classpath:logging-config.xml

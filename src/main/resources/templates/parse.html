@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"></meta>
+    <title th:text="${title}"></title>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{/styles/parse.css}" />
+    <script src="//code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script type="text/javascript">
+        <!--
+            $(document).ready(function () {
+                $("#btn").on('click', function () {
+                    let formData = {};
+                    let serialize = $("#parseForm").serializeArray();
+                    serialize.forEach(e => {
+                        formData[e.name] = e.value;
+                    });
+
+                    $.ajax({
+                        type: "POST",
+                        url: "/api/parse",
+                        contentType: "application/json; charset=utf-8",
+                        data: JSON.stringify(formData),
+                        dataType: "json",
+                        async: true,
+                        success: function (e) {
+                            if(e.code == 200){
+                                let result = e.data;
+                                $("#quotient").text(result.quotient);
+                                $("#remainder").text(result.remainder);
+                            } else {
+                                alert(e.message);
+                            }
+                            console.log(Array.isArray(e.data));
+                        },
+                        error: function (xhr, status, error) {
+                            alert('error occurred during parse url');
+                            console.log(error);
+                        }
+                    });
+                });
+            });
+        //-->
+    </script>
+</head>
+<body>
+    <main role="parse" class="container">
+        <div class="container theme-showcase" role="main">
+            <div class="page-header">
+                <form id="parseForm" th:method="post">
+                    <table class="table">
+                        <tbody>
+                            <tr>
+                                <th>URL</th>
+                                <td>
+                                    <input type="text" name="url" class="form-control" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>TYPE</th>
+                                <td>
+                                    <select name="type" class="form-control">>
+                                        <option th:value="'HTML'" th:text="HTML"></option>
+                                        <option th:value="'TEXT'" th:text="TEXT"></option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>출력 묶음단</th>
+                                <td>
+                                    <input type="number" name="divide" class="form-control" />
+                                </td>
+                            </tr>
+                            <tr>
+                                <th colspan="2">
+                                    <input id="btn" type="button" value="출력" class="btn btn-sm btn-default"/>
+                                </th>
+                            </tr>
+                            <tr>
+                                <th>몫</th>
+                                <td>
+                                    <textarea disabled id="quotient" rows="10" class="form-control"></textarea>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>나머지</th>
+                                <td>
+                                    <textarea disabled id="remainder" rows="10" class="form-control"></textarea>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </form>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
