@@ -6,9 +6,11 @@ import com.wemakeprice.parsetest.exception.ParseException;
 import com.wemakeprice.parsetest.model.parse.ParseData;
 import com.wemakeprice.parsetest.model.parse.ReturnData;
 import com.wemakeprice.parsetest.model.response.RESPONSE_STATUS;
+import com.wemakeprice.parsetest.service.ParseService;
 import org.hamcrest.collection.IsMapContaining;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
 import java.util.Map;
@@ -84,7 +86,7 @@ public class ParseUtilTest {
     @Test
     @DisplayName("몫과 나머지 계산 후 최종 결과값 반환 테스트")
     public void testGetCombineText() {
-        ReturnData rd = ParseUtil.getCombineText(htmlParseData, 1300);
+        ReturnData rd = ParseService.getCombineText(htmlParseData, 1300);
 
         ObjectMapper objectMapper = new ObjectMapper();
         Map<String, Object> resultMap = objectMapper.convertValue(rd, Map.class);
@@ -106,7 +108,7 @@ public class ParseUtilTest {
     @DisplayName("파싱된 데이터 중 HTML을 제외한 영문자와 숫자 조합 문자열 생성 테스트")
     public void testGetExceptHtml() throws Exception {
         String parseUrl = ParseUtil.parseUrl(url);
-        ParseData parseData = ParseUtil.getExceptHtml(parseUrl);
+        ParseData parseData = ParseService.getExceptHtml(parseUrl);
 
         ObjectMapper objectMapper = new ObjectMapper();
         Map<String, Object> resultMap = objectMapper.convertValue(parseData, Map.class);
@@ -128,7 +130,7 @@ public class ParseUtilTest {
     @DisplayName("파싱된 데이터 중 영문자와 숫자 조합 문자열 생성 테스트")
     public void testGetAllText() throws Exception {
         String parseUrl = ParseUtil.parseUrl(url);
-        ParseData parseData = ParseUtil.getAllText(parseUrl);
+        ParseData parseData = ParseService.getAllText(parseUrl);
 
         ObjectMapper objectMapper = new ObjectMapper();
         Map<String, Object> resultMap = objectMapper.convertValue(parseData, Map.class);

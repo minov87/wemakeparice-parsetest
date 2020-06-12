@@ -19,6 +19,13 @@ public class ParseController {
     @Autowired
     ParseService parseService;
 
+    /**
+     * URL 파싱 API
+     *
+     * @param param
+     * @return
+     * @throws Exception
+     */
     @RequestMapping(value = "/parse", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
     public Response parseUrl(
             @RequestBody(required = true) ParseParams param) throws Exception {

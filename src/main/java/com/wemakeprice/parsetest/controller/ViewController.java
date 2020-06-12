@@ -8,6 +8,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Slf4j
 @Controller
 public class ViewController {
+    /**
+     * HTML VIEW
+     *
+     * @param model
+     * @return
+     */
     @GetMapping("/")
     public String parse(Model model) {
         model.addAttribute("title", "Wemakeprice Parse Test");
